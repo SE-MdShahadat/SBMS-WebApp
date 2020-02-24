@@ -1,0 +1,73 @@
+﻿
+
+@model SBMSwebApp.Models.Models.ProductViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-group" style="border:1px solid #00ff21; padding: 10px;">
+    <h4 style="font-family:'Bookman Old Style'; border-bottom:thick" align="center">Product List</h4>
+</div>
+<div class="container" ">
+    <form method="post">
+        <div class="form-group row">
+            <div class="col-md-6 float-left">
+                <a href="/Product/SaveProduct" class="btn btn-info"><i class="fa fa-plus-circle"></i> <b>Add Product</b></a>
+            </div>
+            <div class="col-md-4 float-right">
+                @Html.TextBoxFor(c => c.SearchText, new { @class = "form-control", placeholder = "Search Product" })
+            </div>
+            <div class="col-md-2 float-right">
+                <input type="submit" value="Search" class="btn btn-block btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@if (Model != null)
+{
+    <div class="container"style="width:100%; border:1px solid #00ff21;">
+        <div class="form-group row">
+            
+                <table class="table table-bordered table-hover table-striped">
+                    <thead style="background-color:forestgreen; color:white; text-align:center; font-weight:bold">
+                        <tr class="font-weight-light">
+                            <td style="padding:1px 1px 1px 1px">SL</td>
+                            <td style="padding:1px 1px 1px 1px">Code</td>
+                            <td style="padding:1px 1px 1px 1px">Product Name</td>
+                            <td style="padding:1px 1px 1px 1px">Category</td>
+                            <td style="padding:1px 1px 1px 1px">Reorder Level</td>
+                            <td style="padding:1px 1px 1px 1px">Image</td>
+                            <td style="padding:1px 1px 1px 1px">Action</td>
+                            
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center; font-weight:initial">
+                        @{ int sl = 1;}
+                        @foreach (var product in Model.Products)
+                        {
+                        <tr>
+                            <td style="padding:0.75px 0.75px 0.75px 0.75px">@(sl++)</td>
+                            <td style="padding:0.75px 0.75px 0.75px 0.75px">@product.ProductCode</td>
+                            <td style="padding:0.75px 0.75px 0.75px 0.75px">@product.ProductName</td>
+                            <td style="padding:0.75px 0.75px 0.75px 0.75px">@product.CategoryName</td>
+                            <td style="padding:0.75px 0.75px 0.75px 0.75px">@product.ReorderLevel</td>
+                            <td style="padding:0.75px 0.75px 0.75px 0.75px">
+                                <img src="@Url.Content(product.ImagePath)" width="35" height="35" style="border:1px solid green" />
+                            </td>
+                            <td style="padding:0.75px 0.75px 0.75px 0.75px">
+                            <a href="/Product/UpdateProduct?id=@product.ProductId" > <i class="fa fa-edit " style="color:forestgreen"> </i></a>
+                            <a href="/Product/ProductDetails?id=@product.ProductId"> <i class="fa fa-info" style="color:blue"> </i></a>
+                            <a href="/Product/DeleteProduct?id=@product.ProductId" > <i class="fa fa-trash" style="color:red"> </i></a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            
+        </div>
+    </div>
+}
+
+

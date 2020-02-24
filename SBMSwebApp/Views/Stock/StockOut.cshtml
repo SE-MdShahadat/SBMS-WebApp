@@ -1,0 +1,154 @@
+﻿
+@model SBMSwebApp.Models.Models.ProductViewModel
+@{
+    ViewBag.Title = "StockOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null && Model.ProductId > 0)
+{
+    <form method="post">
+        <div class="container">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <h3 class="text-info" style="text-align:center">Stock Out Today's Expired Products</h3>
+                </div>
+                <div class="row">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Stock Out Products</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="col-md-2" >
+                                        Code
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="hidden" value="@Model.ProductId" name="ProductId" />
+                                        @Html.TextBoxFor(c => c.ProductCode, null, new { @class = "form-control", @readonly = "readonly", @placeholder = "Product Code" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-2">
+                                        Name
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(c => c.ProductName, null, new { @class = "form-control", @readonly = "readonly", @placeholder = "Product Code" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="col-md-2">
+                                        Expire Date
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.ExpireDate, "{0:MM/d/yyyy}", new { @class = "form-control", @readonly = "readonly", @placeholder = "Expire-Date" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-2">
+                                        Expire Quantity
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(c => c.ExpiredQuantity, null, new { @class = "form-control", @readonly = "readonly", @placeholder = "Expired Quantity" })
+                                    </div>
+                                </div>
+                            </div><hr />
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="col-md-2">
+                                        Date
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Date" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-2">
+                                        Last CP(Tk)
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(c => c.PreviousCostPrice, null, new { @class = "form-control", @readonly = "readonly", @placeholder = "Last Cost Price" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-2">
+                                        Out Quantity
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(c => c.StockOutQuantity, null, new { @class = "form-control", @placeholder = "Stock Out Quantity" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-2">
+                                        Total Price
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(c => c.TotalPrice, null, new { @class = "form-control", @readonly = "readonly", @placeholder = "Total Price" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="submit" id="submitButton" class="btn btn-block btn-success" disabled="disabled" value="Save" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </form>
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#StockOutQuantity").keyup(function () {
+            
+                var expiredQuantity = $("#ExpiredQuantity").val();
+                var stockOutQuantity = $("#StockOutQuantity").val();
+                var costPrice = $("#PreviousCostPrice").val();
+                if (stockOutQuantity > 0) {
+                    expiredQuantity = parseInt(expiredQuantity);
+                    stockOutQuantity = parseInt(stockOutQuantity);
+                    if (stockOutQuantity > expiredQuantity) {
+                        alert("Insufficient expired quantity!");
+                        $("#submitButton").prop('disabled', true);
+                        return;
+                    }
+                    var totalPrice = stockOutQuantity * costPrice;
+                    $("#TotalPrice").val(totalPrice);
+                    if (parseFloat(totalPrice) > 0 && totalPrice !== undefined) {
+                        $("#submitButton").prop('disabled', false);
+                    }
+                }
+                else {
+                    $("#TotalPrice").val(0);
+                    $("#submitButton").prop('disabled', true);
+                }
+            })
+
+        });
+    </script>
+
+}
+
+

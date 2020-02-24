@@ -1,0 +1,62 @@
+﻿
+
+@model SBMSwebApp.Models.Models.CategoryViewModel
+@{
+    ViewBag.Title = "CategoryDelete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-group" style="border:1px solid #00ff21; padding: 5px;">
+    <h4 style="font-family:'Bookman Old Style';" align="center">Delete Category</h4>
+</div>
+<div class="container" style="width:100%">
+    <div class="form-group row">
+        <a href="/Category/Index" class="btn btn-info"><i class="glyphicon glyphicon-list"></i> Category List</a><hr />
+
+    </div>
+</div>
+<div class="container" style="width:70%;margin-top:3%;">
+    <div class="form-group row">
+      
+        <h5 class="text-danger">Are you sure to delete <b style="background-color:yellow;"><u>'@Model.CategoryName'</u></b> category?</h5>
+    </div>
+</div>
+@if (Model != null)
+{
+    <div class="container" style="margin-top:1%;">
+        <form method="post">
+            <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+            <input type="hidden" name="IsActive" value="False" />
+            <input type="hidden" name="Date" value="@DateTime.Now" />
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label>Category Name</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="CategoryName" value="@Model.CategoryName" readonly />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label>Code</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="CategoryCode" value="@Model.CategoryCode" readonly />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4"></div>
+                <div class="col-md-5">
+                    <input type="submit" class="btn btn-block btn-danger" value="Confirm Delete" />
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </form>
+
+    </div>
+}
+
+
+

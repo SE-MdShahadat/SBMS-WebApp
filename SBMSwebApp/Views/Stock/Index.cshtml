@@ -1,0 +1,144 @@
+﻿
+@model SBMSwebApp.Models.Models.ProductViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-group" style="border:1px solid #00ff21; padding: 10px;">
+    <h4 style="font-family:'Bookman Old Style'; border-bottom:thick" align="center">Stock Report</h4>
+</div>
+
+<form method="post">
+    <div class="container">
+        <div class="text-danger">
+            <h3 style="text-align:center">@ViewBag.Message</h3>
+        </div>
+        <div class="row">
+            
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">                                   
+                                        <div class="col-md-4" style="text-align:right; padding:5px ">
+                                            Category
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(c => c.CategoryId, ViewBag.Categories as SelectList, "--Select--", new { @class = "form-control" })
+                                        </div>                                   
+                                </div>
+                                <div class="form-group row">
+                                    
+                                        <div class="col-md-4" style="text-align:right; padding:5px ">
+                                            Product
+                                        </div>
+                                        <div class="col-md-8">
+                                            <select id="ProductId" name="ProductId" class="form-control">
+                                                <option value="">--Select--</option>
+                                            </select>
+                                        </div>                                    
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <div class="form-group row">
+                                    <div class="col-md-4" style="text-align:right; padding:5px ">Start Date</div>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Date" } })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-md-4" style="text-align:right; padding:5px ">End Date</div>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Date" } })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                       
+
+                        
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-3">
+                                    @Html.CheckBoxFor(c => c.IsCheckReorderLevel)
+                                    Reorder Level
+                                
+                            </div>
+                            <div class="col-md-3">
+                                    @Html.CheckBoxFor(c => c.IsCheckExpireDate)
+                                    Expired                              
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <input type="submit" class="btn btn-block btn-success" value="Search" />
+                            </div>
+
+                        </div>
+
+                       
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+       <br />
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-hover table-striped">
+            <thead style="background-color:forestgreen; color:white; text-align:center; font-weight:lighter">
+                <tr>
+                    <td>SL</td>
+                    <td>Code</td>
+                    <td>Name</td>
+                    <td>Category</td>
+                    <td>Reorder Level</td>
+                    <td>Expire Date</td>
+                    <td>Available Quantity</td>
+                    <td>Expire Quantity</td>
+                    <td>Opening Balance</td>
+                    <td>In</td>
+                    <td>Out</td>
+                    <td>Closing Balance</td>
+                </tr>
+            </thead>
+            @if (Model != null && Model.Products.Count > 0)
+            {
+                <tbody style="text-align:center; font-weight:normal">
+                    @{ int sl = 1;}
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td>@(sl++)</td>
+                            <td>@product.ProductCode</td>
+                            <td><a href="/Product/ProductDetails?id=@product.ProductId" target="_blank">@product.ProductName</a></td>
+                            <td>@product.CategoryName</td>
+                            <td>@product.ReorderLevel</td>
+                            <td>@product.ExpireDate.ToShortDateString()</td>
+                            <td>@product.AvailableQuantity</td>
+                            <td><a href="/Stock/Stockout?id=@product.ProductId" target="_blank">@product.ExpiredQuantity</a></td>
+                            <td>@product.OpeningBalance</td>
+                            <td>@product.InBalance</td>
+                            <td>@product.OutBalance</td>
+                            <td>@product.ClosingBalance</td>
+                        </tr>
+                    }
+                </tbody>
+                        }
+        </table>
+    </div>
+
+</form>
+
+@section Scripts{
+
+    <script src="~/Scripts/Project Scripts/StockScript/StockJs.js"></script>
+
+}
+

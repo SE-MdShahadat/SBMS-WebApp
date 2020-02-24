@@ -1,0 +1,234 @@
+﻿
+@model SBMSwebApp.Models.Models.SalesViewModel
+@{
+
+    ViewBag.Title = "SaveSalesProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<h4 class="text-info">@ViewBag.Message</h4>*@
+<div class="form-group" style="border:1px solid #00ff21; padding: 10px;">
+    <h4 style="font-family:'Bookman Old Style'; border-bottom:thick" align="center">Sale Product</h4>
+</div>
+<form method="post">
+    <div class="container" style="margin-top:3% ;">
+        
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                
+                            </h5>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-primary" style="border:1px solid #4cff00">
+                                            <div class="panel-heading" style="margin:1% ;padding:1%; background-color:#def5c9">
+                                                <h5 class="panel-title" style="font-family:'Bookman Old Style';font-weight:normal">
+                                                    Customer
+                                                </h5>
+                                            </div>
+                                            <div class="form-group row" style="margin-left:1%">
+                                                <div class="col-md-3">
+                                                    Sales Date
+                                                </div>
+                                                <div class="col-md-7">
+                                                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Date" } })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" style="margin-left:1%">
+                                                <div class="col-md-3">
+                                                    Customer
+                                                </div>
+                                                <div class="col-md-7">
+                                                    @Html.DropDownListFor(c => c.CustomerId, ViewBag.Customers as SelectList, "--Select--", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row" style="margin-left:1%">
+                                                <div class="col-md-3">
+                                                    Loyalty Point
+                                                </div>
+                                                <div class="col-md-7">
+                                                    @Html.EditorFor(model => model.LoyaltyPoint, new { htmlAttributes = new { @class = "form-control", @placeholder = "Loyalty Point", @readonly = "readonly" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-primary" style="border:1px solid #4cff00">
+                                            <div class="panel-heading" style="margin:1% ;padding:1%; background-color:#def5c9">
+                                                <h5 class="panel-title" style="font-family:'Bookman Old Style';font-weight:normal">
+                                                    Product
+                                                </h5>
+                                            </div>
+                                            <div class="form-group row" style="margin-left:1%">
+                                                <div class="col-md-3">
+                                                    Product
+                                                </div>
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(c => c.ProductId, ViewBag.Products as SelectList, "--Select--", new { @class = "form-control" })
+                                                    <input type="hidden" id="ProductName" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" style="margin-left:1%">
+                                                <div class="col-md-3">
+                                                    Available Quantity
+                                                </div>
+                                                <div class="col-md-8">
+                                                    @Html.EditorFor(model => model.AvailabelQuantity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Available Quantity", @readonly = "readonly" } })
+                                                    <input type="hidden" id="reorderLevel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" style="margin-left:1%">
+                                                <div class="col-md-3">
+                                                    Unit Price
+                                                </div>
+                                                <div class="col-md-8">
+                                                    @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Unit Price", @readonly = "readonly" } })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" style="margin-left:1%">
+                                                <div class="col-md-3">
+                                                    Quantity
+                                                </div>
+                                                <div class="col-md-8">
+                                                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Quantity" } })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" style="margin-left:1%">
+                                                <div class="col-md-2">
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label id="alert" style="display:none" class="text-danger">Reorder level alert!</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="button" id="AddButton" class="btn btn-info" value="Add" />
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+               
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                      
+                                    </h5>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered table-hover table-striped">
+                                                <thead style="background-color:forestgreen; color:white; text-align:center; font-weight:lighter">
+                                                    <tr>
+                                                        <td>SL</td>
+                                                        <td>Product</td>
+                                                        <td>Quantity</td>
+                                                        <td>Unit Price(Tk)</td>
+                                                        <td>Total Price(Tk)</td>
+                                                        <td>Action</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tableBody" style="text-align:center; font-weight:normal"></tbody>
+                                            </table>
+                                        </div>
+                                        
+                                    </div>
+                                    <hr style="color:#00ff21" />
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-5">
+                                                    Grand Total(Tk)
+                                                </div>
+                                                <div class="col-md-5">
+                                                    @Html.TextBoxFor(c => c.GrandTotal, new { @class = "form-control", @placeholder = "Grand Total", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-5">
+                                                    Discount(%)
+                                                </div>
+                                                <div class="col-md-5">
+                                                    @Html.TextBoxFor(c => c.DiscountParcent, new { @class = "form-control", @placeholder = "Discount %" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-5">
+                                                    Discount Amount(Tk)
+                                                </div>
+                                                <div class="col-md-5">
+                                                    @Html.TextBoxFor(c => c.DiscountAmount, new { @class = "form-control", @placeholder = "Discount Amount", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-5">
+                                                    Payable Amount(Tk)
+                                                </div>
+                                                <div class="col-md-5">
+                                                    @Html.TextBoxFor(c => c.PayableAmount, new { @class = "form-control", @placeholder = "Payable Amount" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7"></div>
+                                        <div class="col-md-5">
+                                            <input type="submit" id="SalesSubmitButton" class="btn btn-block btn-success" value="Sold" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                                   
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+
+
+        
+        
+
+        
+    </div>
+</form>
+@section Scripts{
+
+    <script src="~/Scripts/Project Scripts/ProductSalesScripts/SalesProductJS.js"></script>
+}

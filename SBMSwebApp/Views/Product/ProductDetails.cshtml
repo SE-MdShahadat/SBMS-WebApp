@@ -1,0 +1,108 @@
+﻿
+
+@model SBMSwebApp.Models.Models.ProductViewModel
+@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-group" style="border:1px solid #00ff21; padding: 5px;">
+    <h4 style="font-family:'Bookman Old Style';" align="center">Product Details</h4>
+</div>
+<div class="container" style="width:100%;">
+    <div class="form-group row">
+        <a href="/Product/Index" class="btn btn-info"><i class="glyphicon glyphicon-list"></i> Product List</a><hr />
+
+        @if (ViewBag.Message != null)
+        {
+            <h3 width="60%" align="center" class="label-danger">@ViewBag.Message</h3>
+
+        }
+    </div>
+</div>
+@if (Model != null)
+{
+    <input type="hidden" name="ProductId" value="@Model.ProductId" />
+    <input type="hidden" name="IsActive" value="True" />
+    <input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()" />
+    <div class="container" style="width:90%; margin-top:3%">
+        <div class="col-md-9 float-left">
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <label>Product Name</label>
+                </div>
+                <div class="col-md-5">
+                    @Html.DisplayFor(c => c.ProductName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <label>Product Code</label>
+                </div>
+                <div class="col-md-5">
+                    @Html.DisplayFor(c => c.ProductCode, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <label>Category</label>
+                </div>
+                <div class="col-md-5">
+                    @Html.DisplayFor(c => c.CategoryName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <label>Reorder Level</label>
+                </div>
+                <div class="col-md-5">
+                    @Html.DisplayFor(c => c.ReorderLevel, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <label>Description</label>
+                </div>
+                <div class="col-md-5">
+                    @Html.DisplayFor(c => c.Description, new { @class = "form-control" })
+                </div>
+            </div>
+            @*<div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-5">
+                    <a href="/Product/UpdateProduct?id=@Model.ProductId" class="btn btn-block btn-success">Update</a>
+                </div>
+            </div>*@
+        </div>
+        @*<div class="col-md-4">
+            <div class="form-group row">
+                    <img src="@Url.Content(Model.ImagePath)" width="90%" height="150" style="border:1px solid red" />
+                </div>
+            <div class="card" style="width:18rem;">
+                <img class="card-img-top" src="@Url.Content(Model.ImagePath)" width="90%" height="150" alt="Product Image" />
+                <div class="card-body">
+                    <p class="card-text" style="text-align:center">
+                        <br />
+                        <b style="color:steelblue">@Model.ProductName</b>
+                    </p>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-md-3 float-right">
+            <div class="form-group row">
+                <img src="@Url.Content(Model.ImagePath)" width="200" height="200" style="border:1px solid #00ff21" />
+                <b style="color:forestgreen">@Model.ProductName</b>
+            </div>
+        </div>
+    </div>
+}
+
+

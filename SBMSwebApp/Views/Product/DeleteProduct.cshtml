@@ -1,0 +1,106 @@
+﻿
+
+@model SBMSwebApp.Models.Models.ProductViewModel
+@{
+    ViewBag.Title = "DeleteProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-group" style="border:1px solid #00ff21; padding: 5px;">
+    <h4 style="font-family:'Bookman Old Style';" align="center">Delete Product</h4>
+</div>
+<div class="container" style="width:100%">
+    <div class="form-group row">
+        <a href="/Product/Index" class="btn btn-info"><i class="glyphicon glyphicon-list"></i> Product List</a><hr />
+
+    </div>
+</div>
+<div class="container" style="width:70%;margin-top:3%;">
+    <div class="form-group row">
+
+        <h5 class="text-danger">Are you sure to delete <b style="background-color:yellow;"><u>'@Model.ProductName'</u></b> product?</h5>
+    </div>
+</div>
+<div class="container">
+    <h3 class="text-danger" align="center">
+        @ViewBag.Message
+    </h3>
+</div>
+@if (Model != null)
+{
+    <form method="post">
+        <input type="hidden" name="ProductId" value="@Model.ProductId" />
+        <input type="hidden" name="IsActive" value="False" />
+        <input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()" />
+        <div class="container" style="width:80%; margin-top:3%">
+            <div class="col-md-8 float-left">
+                <div class="form-group row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label>Product Name</label>
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DisplayFor(c => c.ProductName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label>Product Code</label>
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DisplayFor(c => c.ProductCode, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label>Category</label>
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DisplayFor(c => c.CategoryName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label>Reorder Level</label>
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DisplayFor(c => c.ReorderLevel, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label>Description</label>
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DisplayFor(c => c.Description, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-5">
+                        <input type="submit" class="btn btn-danger" value="Delete Confirm" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 float-right">
+                <div class="form-group row">
+                    <img src="@Url.Content(Model.ImagePath)" width="90%" height="200" style="border:1px solid red" />
+                    <h4 class="text-info" align="center">Image</h4>
+                </div>
+            </div>
+        </div>
+    </form>
+
+}
+
+
+
+
+

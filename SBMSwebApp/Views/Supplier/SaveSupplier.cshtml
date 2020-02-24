@@ -1,0 +1,90 @@
+﻿
+
+@model SBMSwebApp.Models.Models.SupplierViewModel
+@{
+    ViewBag.Title = "SaveSupplier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-group" style="border:1px solid #00ff21; padding: 5px;">
+    <h4 style="font-family:'Bookman Old Style';" align="center">Add Supplier</h4>
+</div>
+<div class="container" style="width:100%;">
+    <div class="form-group row">
+        <a href="/Supplier/Index" class="btn btn-info"><i class="glyphicon glyphicon-list"></i> Supplier List</a><hr />
+
+        @if (ViewBag.Message != null)
+        {
+            <h3 width="60%" align="center" class="label-danger">@ViewBag.Message</h3>
+
+        }
+    </div>
+</div>
+
+<div class="container">
+    <form method="post">
+        <input type="hidden" name="IsActive" value="True" />
+        <input type="hidden" name="Date" value="@DateTime.Now" />
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <label>Code</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="Code" placeholder="Enter supplier code" value="@if (Model != null) { @Model.Code}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <label>Name</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="Name" placeholder="Enter supplier name" value="@if (Model != null) { @Model.Name}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <label>Address</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="Address" placeholder="Enter supplier Address" value="@if (Model != null) { @Model.Address}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <label>Email</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="Email" placeholder="Enter supplier Email" value="@if (Model != null) { @Model.Email}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <label>Contact</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="Contact" placeholder="Enter supplier Contact" value="@if (Model != null) { @Model.Contact}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <label>Contact Person</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="ContactPerson" placeholder="Enter supplier Contact Person" value="@if (Model != null) { @Model.ContactPerson}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4"></div>
+            <div class="col-md-5">
+                <input type="submit" class="btn btn-block btn-success" value="Save" />
+            </div>
+        </div>
+    </form>
+</div>
+
+

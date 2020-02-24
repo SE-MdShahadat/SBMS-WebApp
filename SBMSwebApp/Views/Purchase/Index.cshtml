@@ -1,0 +1,63 @@
+﻿
+
+
+@model SBMSwebApp.Models.PurchaseViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-group" style="border:1px solid #00ff21; padding: 10px;">
+    <h4 style="font-family:'Bookman Old Style'; border-bottom:thick" align="center">Purchased Product List</h4>
+</div>
+<div class="container">
+    <form method="post">
+        <div class="form-group row">
+            <div class="col-md-6 float-left">
+                <a href="/Purchase/InsertPurchaseProduct" class="btn btn-info"><i class="fa fa-plus-circle"></i> <b>Purchase Product</b></a>
+            </div>
+            <div class="col-md-4 float-right">
+                @Html.TextBoxFor(c => c.SearchText, new { @class = "form-control", placeholder = "Search Purchased Product" })
+            </div>
+            <div class="col-md-2 float-right">
+                <input type="submit" value="Search" class="btn btn-block btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+<form method="post">
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead style="background-color:forestgreen; color:white; text-align:center; font-weight:bold">
+                        <tr class="font-weight-light">
+                            <td style="padding:1px 1px 1px 1px">SL</td>
+                            <td style="padding:1px 1px 1px 1px">Product</td>
+                            <td style="padding:1px 1px 1px 1px">Available Quantity</td>
+                            <td style="padding:1px 1px 1px 1px">Unit Price</td>
+                            <td style="padding:1px 1px 1px 1px">New MRP</td>
+                        </tr>
+                    </thead>
+                    @if (Model != null && Model.PurchaseViewModels.Count > 0)
+                    {
+                        <tbody style="text-align:center; font-weight:lighter">
+                            @{
+                                int sl = 1;
+                            }
+                            @foreach (var item in Model.PurchaseViewModels)
+                            {
+                                <tr>
+                                    <td>@(sl++)</td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.PreviousCostPrice</td>
+                                    <td>@item.PreviousMRP</td>
+                                </tr>
+                            }
+                        </tbody>
+                                }
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

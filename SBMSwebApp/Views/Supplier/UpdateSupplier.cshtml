@@ -1,0 +1,101 @@
+﻿
+
+@model SBMSwebApp.Models.Models.SupplierViewModel
+@{
+    ViewBag.Title = "UpdateSupplier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-group" style="border:1px solid #00ff21; padding: 5px;">
+    <h4 style="font-family:'Bookman Old Style';" align="center">Update Supplier</h4>
+</div>
+<div class="container" style="width:100%">
+    <div class="form-group row">
+        <a href="/Supplier/Index" class="btn btn-info"><i class="glyphicon glyphicon-list"></i> Supplier List</a><hr />
+
+    </div>
+</div>
+<div class="container" style="width:100%;">
+    <div class="form-group row">
+
+
+        @if (ViewBag.Message != null)
+        {
+            <h5 width="60%" align="center" class="label-danger alert-warning">@ViewBag.Message</h5>
+
+        }
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <div class="container">
+        <form method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <input type="hidden" name="IsActive" value="True" />
+            <input type="hidden" name="Date" value="@DateTime.Now" />
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label>Code</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="Code" value="@Model.Code" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label>Name</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="Name" value="@Model.Name" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label>Address</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="Address" value="@Model.Address" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label>Email</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="Email" value="@Model.Email" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label>Contact</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="Contact" value="@Model.Contact" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label> Contact Person</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="ContactPerson" value="@Model.ContactPerson" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4"></div>
+                <div class="col-md-5">
+                    <input type="submit" class="btn btn-block btn-success" value="Update" />
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+
+
